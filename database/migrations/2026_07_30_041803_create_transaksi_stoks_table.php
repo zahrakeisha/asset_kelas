@@ -14,7 +14,18 @@ class CreateTransaksiStoksTable extends Migration
     public function up()
     {
         Schema::create('transaksi_stoks', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('transaksi_stok_id');
+            $table->foreignId('barang_id')->constrained('barangs', 'barang_id')->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->foreignId('supplier_id')
+                ->nullable()
+                ->constrained('suppliers', 'supplier_id')
+                ->nullOnDelete();
+
+            $table->date('tanggal');
+            $table->enum('jenis', ['Masuk', 'Keluar']);
+            $table->integer('jumlah');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

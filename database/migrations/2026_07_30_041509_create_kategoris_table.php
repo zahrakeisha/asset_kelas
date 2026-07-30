@@ -14,7 +14,8 @@ class CreateKategorisTable extends Migration
     public function up()
     {
         Schema::create('kategoris', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('kategori_id');
+            $table->string('nama_kategori');
             $table->timestamps();
         });
     }
