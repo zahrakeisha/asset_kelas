@@ -21,7 +21,7 @@ class CreatePengajuanBarangsTable extends Migration
             $table->text('alasan');
             $table->enum('status', ['Menunggu', 'Disetujui', 'Ditolak'])->default('Menunggu');
             $table->text('catatan')->nullable();
-            $table->foreign('barang_id')->references('barangs')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('barang_id')->references('barang_id')->on('barangs')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
