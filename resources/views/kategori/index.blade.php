@@ -17,8 +17,8 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $kategori->nama_kategori }}</td>
                 <td>
-                    <a href="#">Edit</a>
-                    <a href="#">Hapus</a>
+                    <a href="{{ route('kategori.edit', $kategori->kategori_id)}}">Edit</a>
+                    <a href="{{ route('kategori.destroy', $kategori->kategori_id)}}">Hapus</a>
                 </td>
             </tr>
         @endforeach
