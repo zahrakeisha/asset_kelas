@@ -14,14 +14,14 @@ class CreateMasaEkonomisTable extends Migration
     public function up()
     {
         Schema::create('masa_ekonomis', function (Blueprint $table) {
-            $table->bigIncrements('masa-ekonomis-id');
+            $table->bigIncrements('masa_ekonomis_id');
 
             $table->unsignedBigInteger('kategori_id');
             $table->integer('lama_ekonomis');
             $table->string('satuan')->default('Tahun');
             $table->text('keterangan')->nullable();
 
-            $table->foreign('kategori_id')->references('kategori-id')
+            $table->foreign('kategori_id')->references('kategori_id')
             ->on('kategoris')
             ->onUpdate('cascade')
             ->onDelete('restrict');
