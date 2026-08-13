@@ -1,28 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $users = User::all();
 
-        return view('users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        return view('users.create');
+        return view('admin.users.create');
     }
 
     public function store(Request $request)
@@ -45,14 +41,16 @@ class UserController extends Controller
             'role' => $request->role
         ]);
 
-        return redirect('/users')->with('success', 'Data berhasil ditambahkan');
+        return redirect()
+            ->route('admin.user.index')
+            ->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
 
-        return view('users.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -81,7 +79,9 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect('/users')->with('success', 'Data berhasil diubah');
+        return redirect()
+            ->route('admin.user.index')
+            ->with('success', 'Data berhasil diubah');
     }
 
     public function destroy($id)
@@ -90,6 +90,8 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect('/users')->with('success', 'Data berhasil dihapus');
+        return redirect()
+            ->route('admin.user.index')
+            ->with('success', 'Data berhasil dihapus');
     }
 }
