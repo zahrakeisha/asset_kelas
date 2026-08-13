@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use App\Masa_ekonomis as AppMasa_ekonomis;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Masa_ekonomis;
-use App\Models\Pengajuan_barang;
+use App\Masa_ekonomis;
+use App\Pengajuan_barang;
 
 
 

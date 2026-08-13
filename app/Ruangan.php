@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Barang;
 
 class Ruangan extends Model
 {

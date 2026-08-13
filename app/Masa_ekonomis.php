@@ -3,8 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Barang;
-use App\Models\Kategori;
+use App\Barang;
+use App\Kategori;
 
 class Masa_ekonomis extends Model
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Masa_ekonomis;
+use App\Masa_ekonomis;
 
 class Kategori extends Model
 {
