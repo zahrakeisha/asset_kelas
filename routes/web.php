@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\MasaEkonomisController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\PengajuanBarangController;
+use App\Http\Controllers\RuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/pengajuan-barang/{id}/edit', [PengajuanBarangController::class, 'edit'])->name('pengajuan_barang.edit');
         Route::put('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'update'])->name('pengajuan_barang.update');
         Route::delete('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'destroy'])->name('pengajuan_barang.destroy');
+
+        Route::get('/index/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+        Route::get('/create/ruangan', [RuanganController::class, 'create'])->name('ruangan.create');
+        Route::post('/store/ruangan', [RuanganController::class, 'store'])->name('ruangan.store');
+        Route::get('/edit/{id}/ruangan', [RuanganController::class, 'edit'])->name('ruangan.edit');
+        Route::post('/update/{id}/ruangan', [RuanganController::class, 'update'])->name('ruangan.update');
+        Route::get('/delete/{id}/ruangan', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
 
     });
 
