@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\MasaEkonomisController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\PengajuanBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
         Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
+        // masa ekonomis
         Route::get('/masa_ekonomis', [MasaEkonomisController::class, 'index'])->name('masa_ekonomis.index');
         Route::get('/masa_ekonomis/create', [MasaEkonomisController::class, 'create'])->name('masa_ekonomis.create');
         Route::post('/masa_ekonomis', [MasaEkonomisController::class, 'store'])->name('masa_ekonomis.store');
@@ -57,4 +59,29 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/masa_ekonomis/{id}/edit', [MasaEkonomisController::class, 'edit'])->name('masa_ekonomis.edit');
         Route::delete('/masa_ekonomis/{id}', [MasaEkonomisController::class, 'destroy'])->name('masa_ekonomis.destroy');
 
+        // pengajuan barang
+        Route::get('/pengajuan-barang', [PengajuanBarangController::class, 'index'])->name('pengajuan_barang.index');
+        Route::get('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'show'])->name('pengajuan_barang.show');
+        Route::get('/pengajuan-barang/{id}/edit', [PengajuanBarangController::class, 'edit'])->name('pengajuan_barang.edit');
+        Route::put('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'update'])->name('pengajuan_barang.update');
+        Route::delete('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'destroy'])->name('pengajuan_barang.destroy');
+
     });
+
+Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->name('petugas.')->group(function () {
+
+        // pengajuan barang
+        Route::get('/pengajuan-barang', [PengajuanBarangController::class, 'index'])->name('petugas.pengajuan_barang.index');
+        Route::get('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'show'])->name('petugas.pengajuan_barang.show');
+        Route::get('/pengajuan-barang/{id}/edit', [PengajuanBarangController::class, 'edit'])->name('petugas.pengajuan_barang.edit');
+        Route::put('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'update'])->name('petugas.pengajuan_barang.update');
+});
+
+Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
+
+        // pengajuan barang
+        Route::get('/pengajuan_barang', [PengajuanBarangController::class, 'index'])->name('pengajuan_barang.index');
+        Route::get('/pengajuan_barang/create', [PengajuanBarangController::class, 'create'])->name('pengajuan_barang.create');
+        Route::post('/pengajuan_barang', [PengajuanBarangController::class, 'store'])->name('pengajuan_barang.store');
+        Route::get('/pengajuan_barang/{id}', [PengajuanBarangController::class, 'show'])->name('pengajuan_barang.show');
+});
