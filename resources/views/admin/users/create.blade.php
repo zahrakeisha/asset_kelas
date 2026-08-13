@@ -7,7 +7,7 @@
 
     <h2>Tambah User</h2>
 
-    <form action="{{ url('/users') }}" method="POST">
+   <form action="{{ route('admin.user.store') }}" method="POST">
 
         @csrf
 
@@ -59,8 +59,8 @@
                     Petugas
                 </option>
 
-                <option value="peminjam">
-                    Peminjam
+                <option value="siswa">
+                    Siswa
                 </option>
 
             </select>

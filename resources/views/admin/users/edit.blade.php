@@ -6,8 +6,8 @@
 <body>
 
     <h2>Edit User</h2>
-
-    <form action="{{ url('/users/'.$user->id) }}" method="POST">
+    
+    <form action="{{ route('admin.user.update', $user->id) }}" method="POST">
 
         @csrf
         @method('PUT')
@@ -68,8 +68,8 @@
                     Petugas
                 </option>
 
-                <option value="peminjam"
-                    {{ $user->role == 'peminjam' ? 'selected' : '' }}>
+                <option value="siswa"
+                    {{ $user->role == 'siswa' ? 'selected' : '' }}>
                     Peminjam
                 </option>
 

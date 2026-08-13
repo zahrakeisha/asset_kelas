@@ -11,7 +11,9 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <a href="{{ url('/users/create') }}">Tambah User</a>
+    <a href="{{ route('admin.user.create') }}">
+        Tambah User
+    </a>
 
     <br><br>
 
@@ -34,22 +36,23 @@
             <td>{{ $user->no_telpon }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->role }}</td>
+
             <td>
-                <a href="{{ url('/users/'.$user->id.'/edit') }}">
+                <a href="{{ route('admin.user.edit', $user->id) }}">
                     Edit
                 </a>
 
-                <form action="{{ url('/users/'.$user->id) }}"
+                <form
+                    action="{{ route('admin.user.destroy', $user->id) }}"
                     method="POST"
-                    style="display:inline">
-
+                    style="display:inline"
+                >
                     @csrf
                     @method('DELETE')
 
                     <button type="submit">
                         Hapus
                     </button>
-
                 </form>
             </td>
         </tr>

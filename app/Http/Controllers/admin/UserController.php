@@ -42,7 +42,7 @@ class UserController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.user.index')
+            ->route('admin.users.index')
             ->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
         $user->update($data);
 
         return redirect()
-            ->route('admin.user.index')
+            ->route('admin.users.index')
             ->with('success', 'Data berhasil diubah');
     }
 
@@ -91,7 +91,7 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()
-            ->route('admin.user.index')
+            ->route('admin.users.index')
             ->with('success', 'Data berhasil dihapus');
     }
 }
