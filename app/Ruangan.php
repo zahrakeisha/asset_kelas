@@ -7,7 +7,7 @@ use App\Barang;
 
 class Ruangan extends Model
 {
-    protected $table = 'ruangan';
+    protected $table = 'ruangans';
     protected $primaryKey = 'ruangan_id';
 
     protected $fillable = [

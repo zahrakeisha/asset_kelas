@@ -7,7 +7,11 @@ use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\MasaEkonomisController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\admin\PengajuanBarangController;
+=======
+use App\Http\Controllers\PengajuanBarangController;
+>>>>>>> Stashed changes
 use App\Http\Controllers\admin\RuanganController;
 
 /*
@@ -70,6 +74,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/index/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
         Route::get('/create/ruangan', [RuanganController::class, 'create'])->name('ruangan.create');
         Route::post('/store/ruangan', [RuanganController::class, 'store'])->name('ruangan.store');
+        Route::get('/show/{id}/ruangan', [RuanganController::class, 'show'])->name('ruangan.show');
         Route::get('/edit/{id}/ruangan', [RuanganController::class, 'edit'])->name('ruangan.edit');
         Route::post('/update/{id}/ruangan', [RuanganController::class, 'update'])->name('ruangan.update');
         Route::get('/delete/{id}/ruangan', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
