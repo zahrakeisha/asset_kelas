@@ -7,11 +7,9 @@ use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\MasaEkonomisController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
-<<<<<<< Updated upstream
+
 use App\Http\Controllers\admin\PengajuanBarangController;
-=======
-use App\Http\Controllers\PengajuanBarangController;
->>>>>>> Stashed changes
+
 use App\Http\Controllers\admin\RuanganController;
 use App\Http\Controllers\admin\BarangController;
 
