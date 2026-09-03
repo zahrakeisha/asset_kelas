@@ -1,6 +1,6 @@
 <h1>Tambah Kategori</h1>
 
-<form action="{{ route('kategori.store') }}" method="POST">
+<form action="{{ route('admin.kategori.store') }}" method="POST">
     @csrf
 
     <label>Nama Kategori</label>
@@ -9,4 +9,4 @@
     <button type="submit">Simpan</button>
 </form>
 
-<a href="{{ route('kategori.index') }}">Kembali</a>
+<a href="{{ route('admin.kategori.index') }}">Kembali</a>

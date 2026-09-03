@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tambah Barang</title>
+    <title>Edit Barang</title>
 </head>
 <body>
 
-<h1>Tambah Barang</h1>
+<h1>Edit Barang</h1>
 
 @if ($errors->any())
     <ul>
@@ -15,15 +15,18 @@
     </ul>
 @endif
 
-<form action="{{ route('admin.barang.store') }}" method="POST">
+<form action="{{ route('admin.barang.update', $barang->barang_id) }}" method="POST">
     @csrf
+    @method('PUT')
 
     <label>Kode Barang</label><br>
-    <input type="text" name="kode_barang" value="{{ old('kode_barang') }}">
+    <input type="text" name="kode_barang"
+           value="{{ old('kode_barang', $barang->kode_barang) }}">
     <br><br>
 
     <label>Nama Barang</label><br>
-    <input type="text" name="nama_barang" value="{{ old('nama_barang') }}">
+    <input type="text" name="nama_barang"
+           value="{{ old('nama_barang', $barang->nama_barang) }}">
     <br><br>
 
     <label>Kategori</label><br>
@@ -32,7 +35,7 @@
 
         @foreach ($kategori as $item)
             <option value="{{ $item->kategori_id }}"
-                {{ old('kategori_id') == $item->kategori_id ? 'selected' : '' }}>
+                {{ old('kategori_id', $barang->kategori_id) == $item->kategori_id ? 'selected' : '' }}>
                 {{ $item->nama_kategori }}
             </option>
         @endforeach
@@ -45,7 +48,7 @@
 
         @foreach ($ruangan as $item)
             <option value="{{ $item->ruangan_id }}"
-                {{ old('ruangan_id') == $item->ruangan_id ? 'selected' : '' }}>
+                {{ old('ruangan_id', $barang->ruangan_id) == $item->ruangan_id ? 'selected' : '' }}>
                 {{ $item->nama_ruangan }}
             </option>
         @endforeach
@@ -58,7 +61,7 @@
 
         @foreach ($masa_ekonomis as $item)
             <option value="{{ $item->masa_ekonomis_id }}"
-                {{ old('masa_ekonomis_id') == $item->masa_ekonomis_id ? 'selected' : '' }}>
+                {{ old('masa_ekonomis_id', $barang->masa_ekonomis_id) == $item->masa_ekonomis_id ? 'selected' : '' }}>
                 {{ $item->lama_ekonomis }} {{ $item->satuan }}
             </option>
         @endforeach
@@ -66,31 +69,34 @@
     <br><br>
 
     <label>Merek</label><br>
-    <input type="text" name="merek" value="{{ old('merek') }}">
+    <input type="text" name="merek"
+           value="{{ old('merek', $barang->merek) }}">
     <br><br>
 
     <label>Model</label><br>
-    <input type="text" name="model" value="{{ old('model') }}">
+    <input type="text" name="model"
+           value="{{ old('model', $barang->model) }}">
     <br><br>
 
     <label>Serial Number</label><br>
-    <input type="text" name="serial_number" value="{{ old('serial_number') }}">
+    <input type="text" name="serial_number"
+           value="{{ old('serial_number', $barang->serial_number) }}">
     <br><br>
 
     <label>Jumlah</label><br>
-    <input type="number" name="jumlah" min="1" value="{{ old('jumlah', 1) }}">
+    <input type="number" name="jumlah" min="1"
+           value="{{ old('jumlah', $barang->jumlah) }}">
     <br><br>
 
     <label>Kondisi</label><br>
     <select name="kondisi">
-        <option value="">-- Pilih Kondisi --</option>
-        <option value="Baik" {{ old('kondisi') == 'Baik' ? 'selected' : '' }}>
+        <option value="Baik" {{ old('kondisi', $barang->kondisi) == 'Baik' ? 'selected' : '' }}>
             Baik
         </option>
-        <option value="Rusak Ringan" {{ old('kondisi') == 'Rusak Ringan' ? 'selected' : '' }}>
+        <option value="Rusak Ringan" {{ old('kondisi', $barang->kondisi) == 'Rusak Ringan' ? 'selected' : '' }}>
             Rusak Ringan
         </option>
-        <option value="Rusak Berat" {{ old('kondisi') == 'Rusak Berat' ? 'selected' : '' }}>
+        <option value="Rusak Berat" {{ old('kondisi', $barang->kondisi) == 'Rusak Berat' ? 'selected' : '' }}>
             Rusak Berat
         </option>
     </select>
@@ -98,14 +104,14 @@
 
     <label>Tanggal Perolehan</label><br>
     <input type="date" name="tanggal_perolehan"
-           value="{{ old('tanggal_perolehan') }}">
+           value="{{ old('tanggal_perolehan', $barang->tanggal_perolehan) }}">
     <br><br>
 
     <label>Keterangan</label><br>
-    <textarea name="keterangan">{{ old('keterangan') }}</textarea>
+    <textarea name="keterangan">{{ old('keterangan', $barang->keterangan) }}</textarea>
     <br><br>
 
-    <button type="submit">Simpan</button>
+    <button type="submit">Update</button>
     <a href="{{ route('admin.barang.index') }}">Kembali</a>
 
 </form>

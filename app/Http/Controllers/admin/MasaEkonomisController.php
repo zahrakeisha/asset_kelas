@@ -15,9 +15,8 @@ class MasaEkonomisController extends Controller
      */
     public function index()
     {
-         $masaEkonomis = Masa_ekonomis::with('kategori')->get();
-
-         return view('masa_ekonomis.index', compact('masaEkonomis'));
+        $masaEkonomis = Masa_ekonomis::with('kategori')->get();
+        return view('masa_ekonomis.index', compact('masaEkonomis'));
     }
 
     /**

@@ -44,7 +44,7 @@ class KategoriController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
@@ -93,7 +93,7 @@ class KategoriController extends Controller
         ]);
 
         return redirect()
-            ->route('kategori.index')
+            ->route('admin.kategori.index')
             ->with('success', 'Kategori berhasil diubah.');
     }
 
@@ -110,7 +110,7 @@ class KategoriController extends Controller
         $kategoris->delete();
 
         return redirect()
-            ->route('kategori.index')
+            ->route('admin.kategori.index')
             ->with('success', 'Kategori berhasil dihapus.');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Pengajuan_barang;
-use App\Models\Barang;
+use App\Barang;
 use Illuminate\Http\Request;
 
 class PengajuanBarangController extends Controller

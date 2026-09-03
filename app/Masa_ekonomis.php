@@ -8,7 +8,7 @@ use App\Kategori;
 
 class Masa_ekonomis extends Model
 {
-    protected $table = ' masa_ekonomis';
+    protected $table = 'masa_ekonomis';
     protected $primaryKey = 'masa_ekonomis_id';
 
     protected $fillable = [

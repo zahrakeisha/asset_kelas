@@ -1,7 +1,8 @@
 <h1>Edit Kategori</h1>
 
-<form action="{{ route('kategori.update', $kategoris->kategori_id) }}" method="POST">
+<form action="{{ route('admin.kategori.update', $kategoris->kategori_id) }}" method="POST">
     @csrf
+    @method('PUT')
 
     <label>Nama Kategori</label>
     <input 
@@ -10,4 +11,4 @@
     <button type="submit">Simpan</button>
 </form>
 
-<a href="{{ route('kategori.index') }}">Kembali</a>
+<a href="{{ route('admin.kategori.index') }}">Kembali</a>

@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\admin\PengajuanBarangController;
 use App\Http\Controllers\admin\RuanganController;
+use App\Http\Controllers\admin\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
         Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
+        // Barang
+        Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+        Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
+        Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
+        Route::get('/barang/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
+        Route::put('/barang/{id}', [BarangController::class, 'update'])->name('barang.update');
+        Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
         // masa ekonomis
         Route::get('/masa_ekonomis', [MasaEkonomisController::class, 'index'])->name('masa_ekonomis.index');
         Route::get('/masa_ekonomis/create', [MasaEkonomisController::class, 'create'])->name('masa_ekonomis.create');
@@ -74,7 +82,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/update/{id}/ruangan', [RuanganController::class, 'update'])->name('ruangan.update');
         Route::get('/delete/{id}/ruangan', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
 
-    });
+});
 
 Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->name('petugas.')->group(function () {
 

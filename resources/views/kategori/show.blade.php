@@ -3,4 +3,4 @@
 <p>ID Kategori: {{ $kategori->kategori_id }}</p>
 <p>Nama Kategori: {{ $kategori->nama_kategori }}</p>
 
-<a href="{{ route('kategori.index') }}">Kembali</a>
+<a href="{{ route('admin.kategori.index') }}">Kembali</a>
