@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Pengajuan_barang;
-use App\Models\Barang;
+use App\Barang;
 use Illuminate\Http\Request;
 
 class PengajuanBarangController extends Controller
@@ -19,50 +20,7 @@ class PengajuanBarangController extends Controller
             ->latest('tanggal_pengajuan')
             ->get();
 
-        return view('pengajuan_barang.index', compact('pengajuan'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $barang = Barang::all();
-
-        return view('pengajuan_barang.create', compact('barang'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'barang_id' => 'required|exists:barangs,barang_id',
-            'tanggal_pengajuan' => 'required|date',
-            'jenis_pengajuan' => 'required|in:Perbaikan,Penggantian,Penambahan',
-            'alasan' => 'required|string',
-            'status' => 'nullable|in:Menunggu,Disetujui,Ditolak',
-            'catatan' => 'nullable|string',
-        ]);
-
-        Pengajuan_barang::create([
-            'barang_id' => $request->barang_id,
-            'tanggal_pengajuan' => $request->tanggal_pengajuan,
-            'jenis_pengajuan' => $request->jenis_pengajuan,
-            'alasan' => $request->alasan,
-            'status' => $request->status ?? 'Menunggu',
-            'catatan' => $request->catatan,
-        ]);
-
-        return redirect()
-            ->route('pengajuan_barang.index')
-            ->with('success', 'Pengajuan berhasil ditambahkan.');
+        return view('admin.pengajuan_barang.index', compact('pengajuan'));
     }
 
     /**
@@ -76,11 +34,11 @@ class PengajuanBarangController extends Controller
         $pengajuan = Pengajuan_barang::with('barang')
             ->findOrFail($id);
 
-        return view('pengajuan_barang.show', compact('pengajuan'));
+        return view('admin.pengajuan_barang.show', compact('pengajuan'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource (Verifikasi Status & Catatan).
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -90,7 +48,7 @@ class PengajuanBarangController extends Controller
         $pengajuan = Pengajuan_barang::findOrFail($id);
         $barang = Barang::all();
 
-        return view('pengajuan_barang.edit', compact('pengajuan', 'barang'));
+        return view('admin.pengajuan_barang.edit', compact('pengajuan', 'barang'));
     }
 
     /**
@@ -123,7 +81,7 @@ class PengajuanBarangController extends Controller
         ]);
 
         return redirect()
-            ->route('pengajuan_barang.index')
+            ->route('admin.pengajuan_barang.index')
             ->with('success', 'Pengajuan barang berhasil diperbarui.');
     }
 
@@ -140,7 +98,7 @@ class PengajuanBarangController extends Controller
         $pengajuan->delete();
 
         return redirect()
-            ->route('pengajuan_barang.index')
+            ->route('admin.pengajuan_barang.index')
             ->with('success', 'Pengajuan barang berhasil dihapus.');
     }
 }

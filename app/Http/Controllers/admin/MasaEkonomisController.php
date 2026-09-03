@@ -15,9 +15,8 @@ class MasaEkonomisController extends Controller
      */
     public function index()
     {
-         $masaEkonomis = Masa_ekonomis::with('kategori')->get();
-
-         return view('masa_ekonomis.index', compact('masaEkonomis'));
+        $masaEkonomis = Masa_ekonomis::with('kategori')->get();
+        return view('masa_ekonomis.index', compact('masaEkonomis'));
     }
 
     /**
@@ -56,7 +55,7 @@ class MasaEkonomisController extends Controller
         ]);
 
         return redirect()
-            ->route('masa_ekonomis.index')
+            ->route('admin.masa_ekonomis.index')
             ->with('success', 'Data masa ekonomis berhasil ditambahkan.');
     }
 
@@ -110,7 +109,7 @@ class MasaEkonomisController extends Controller
             'keterangan' => $request->keterangan,
         ]);
         return redirect()
-            ->route('masa_ekonomis.index')
+            ->route('admin.masa_ekonomis.index')
             ->with('success', 'Data masa ekonomis berhasil diperbarui.');
     }
 
@@ -127,7 +126,7 @@ class MasaEkonomisController extends Controller
         $masaEkonomis->delete();
 
         return redirect()
-            ->route('masa_ekonomis.index')
+            ->route('admin.masa_ekonomis.index')
             ->with('success', 'Data masa ekonomis berhasil dihapus.');
     }
 }

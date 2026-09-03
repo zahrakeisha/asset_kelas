@@ -7,7 +7,7 @@ use App\Barang;
 
 class Pengajuan_barang extends Model
 {
-    protected $table = 'pengajuan_barang';
+    protected $table = 'pengajuan_barangs';
     protected $primaryKey = 'pengajuan_id';
     protected $fillable = [
         'barang_id',

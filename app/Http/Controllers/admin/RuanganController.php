@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Kategori;
+use App\Ruangan;
 
-class KategoriController extends Controller
+class RuanganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategoris = Kategori::all();
-        return view('kategori.index', compact('kategoris'));
+        $ruangan = Ruangan::with('barang')->get();
+        return view ('ruangan.index', compact('ruangan'));
+
     }
 
     /**
@@ -25,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('kategori.create');
+        return view('ruangan.create');
     }
 
     /**
@@ -37,14 +38,18 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required|max:100',
+            'nama_ruangan' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
         ]);
 
-        Kategori::create([
-            'nama_kategori' => $request->nama_kategori,
+        Ruangan::create([
+            'nama_ruangan' => $request->nama_ruangan,
+            'keterangan' => $request->keterangan, 
         ]);
 
-        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()
+        ->route('admin.ruangan.index')
+        ->with('success', 'Data ruangan berhasil ditambahkan.');
     }
 
     /**
@@ -55,9 +60,8 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        $kategoris = Kategori::findOrFail($id);
-
-        return view('kategori.show', compact('kategoris'));
+        $ruangan = Ruangan::with('barang')->findOrFail($id);
+        return view('ruangan.show', compact('ruangan'));
     }
 
     /**
@@ -68,9 +72,8 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kategoris = Kategori::findOrFail($id);
-
-        return view('kategori.edit', compact('kategoris'));
+        $ruangan = Ruangan::findOrFail($id);
+        return view('ruangan.edit', compact('ruangan'));
     }
 
     /**
@@ -83,18 +86,20 @@ class KategoriController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_kategori' => 'required|max:100',
+            'nama_ruangan' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
         ]);
 
-        $kategoris = Kategori::findOrFail($id);
+        $ruangan = Ruangan::findOrFail($id);
 
-        $kategoris->update([
-            'nama_kategori' => $request->nama_kategori,
+        $ruangan->update([
+            'nama_ruangan' => $request->nama_ruangan,
+            'keterangan' => $request->keterangan,
         ]);
 
-        return redirect()
-            ->route('admin.kategori.index')
-            ->with('success', 'Kategori berhasil diubah.');
+       return redirect()
+            ->route('admin.ruangan.index')
+            ->with('success', 'Data ruangan berhasil diupdate.');
     }
 
     /**
@@ -105,12 +110,12 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategoris = Kategori::findOrFail($id);
+        $ruangan = Ruangan::findOrFail($id);
 
-        $kategoris->delete();
+        $ruangan->delete();
 
         return redirect()
-            ->route('admin.kategori.index')
-            ->with('success', 'Kategori berhasil dihapus.');
+        ->route('admin.ruangan.index')
+        ->with('success', 'Data ruangan berhasil ditambahkan.');
     }
 }
