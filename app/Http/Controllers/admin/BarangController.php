@@ -33,7 +33,7 @@ class BarangController extends Controller
         $ruangan = Ruangan::all();
         $masa_ekonomis = Masa_ekonomis::all();
 
-        return view('admin.barang.create', compact(
+        return view('barang.create', compact(
             'kategori',
             'ruangan',
             'masa_ekonomis'
@@ -89,7 +89,7 @@ class BarangController extends Controller
     {
         $barang = Barang::with(['kategori', 'masaEkonomis'])->findOrFail($id);
 
-        return view('admin.barang.show', compact('barang'));
+        return view('barang.show', compact('barang'));
     }
 
     /**
@@ -105,7 +105,7 @@ class BarangController extends Controller
         $ruangan = Ruangan::all();
         $masa_ekonomis = Masa_ekonomis::all();
 
-        return view('admin.barang.edit', compact(
+        return view('barang.edit', compact(
             'barang',
             'kategori',
             'ruangan',

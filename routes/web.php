@@ -68,6 +68,7 @@ Route::middleware(['auth', 'role:admin'])
                 Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
                 Route::get('/barang/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
                 Route::put('/barang/{id}', [BarangController::class, 'update'])->name('barang.update');
+                Route::get('/barang/{id}', [BarangController::class, 'show'])->name('barang.show');
                 Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
 
 
