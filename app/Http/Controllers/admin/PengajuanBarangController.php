@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 use App\Pengajuan_barang;
 use App\Models\Barang;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class PengajuanBarangController extends Controller
             ->latest('tanggal_pengajuan')
             ->get();
 
-        return view('pengajuan_barang.index', compact('pengajuan'));
+        return view('admin.pengajuan_barang.index', compact('pengajuan'));
     }
 
     /**
@@ -31,7 +31,7 @@ class PengajuanBarangController extends Controller
     {
         $barang = Barang::all();
 
-        return view('pengajuan_barang.create', compact('barang'));
+        return view('admin.pengajuan_barang.create', compact('barang'));
     }
 
     /**
@@ -61,7 +61,7 @@ class PengajuanBarangController extends Controller
         ]);
 
         return redirect()
-            ->route('pengajuan_barang.index')
+            ->route('admin.pengajuan_barang.index')
             ->with('success', 'Pengajuan berhasil ditambahkan.');
     }
 
@@ -76,7 +76,7 @@ class PengajuanBarangController extends Controller
         $pengajuan = Pengajuan_barang::with('barang')
             ->findOrFail($id);
 
-        return view('pengajuan_barang.show', compact('pengajuan'));
+        return view('admin.pengajuan_barang.show', compact('pengajuan'));
     }
 
     /**
@@ -90,7 +90,7 @@ class PengajuanBarangController extends Controller
         $pengajuan = Pengajuan_barang::findOrFail($id);
         $barang = Barang::all();
 
-        return view('pengajuan_barang.edit', compact('pengajuan', 'barang'));
+        return view('admin.pengajuan_barang.edit', compact('pengajuan', 'barang'));
     }
 
     /**
@@ -123,7 +123,7 @@ class PengajuanBarangController extends Controller
         ]);
 
         return redirect()
-            ->route('pengajuan_barang.index')
+            ->route('admin.pengajuan_barang.index')
             ->with('success', 'Pengajuan barang berhasil diperbarui.');
     }
 
@@ -140,7 +140,7 @@ class PengajuanBarangController extends Controller
         $pengajuan->delete();
 
         return redirect()
-            ->route('pengajuan_barang.index')
+            ->route('admin.pengajuan_barang.index')
             ->with('success', 'Pengajuan barang berhasil dihapus.');
     }
 }

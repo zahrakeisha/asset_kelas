@@ -7,8 +7,8 @@ use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\MasaEkonomisController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
-use App\Http\Controllers\PengajuanBarangController;
-use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\admin\PengajuanBarangController;
+use App\Http\Controllers\admin\RuanganController;
 
 /*
 |--------------------------------------------------------------------------
