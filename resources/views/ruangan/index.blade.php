@@ -1,6 +1,6 @@
 <h1>Data Ruangan</h1>
 
-<a href="{{ route('ruangan.create') }}">Tambah Ruangan</a>
+<a href="{{ route('admin.ruangan.create') }}">Tambah Ruangan</a>
 
 <table border="1">
     <thead>
@@ -19,8 +19,9 @@
                 <td>{{ $item->nama_ruangan }}</td>
                 <td>{{ $item->keterangan }}</td>
                 <td>
-                    <a href="{{ route('ruangan.edit', $item->ruangan_id) }}">Edit</a>
-                    <a href="{{ route('ruangan.destroy', $item->ruangan_id) }}">Hapus</a>
+                    <a href="{{ route('admin.ruangan.show', $item->ruangan_id) }}">Detail</a>
+                    <a href="{{ route('admin.ruangan.edit', $item->ruangan_id) }}">Edit</a>
+                    <a href="{{ route('admin.ruangan.destroy', $item->ruangan_id) }}">Hapus</a>
                 </td>
             </tr>
         @endforeach
