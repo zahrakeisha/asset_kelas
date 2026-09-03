@@ -67,6 +67,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::put('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'update'])->name('pengajuan_barang.update');
         Route::delete('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'destroy'])->name('pengajuan_barang.destroy');
 
+        //Ruangan
         Route::get('/index/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
         Route::get('/create/ruangan', [RuanganController::class, 'create'])->name('ruangan.create');
         Route::post('/store/ruangan', [RuanganController::class, 'store'])->name('ruangan.store');
@@ -83,6 +84,12 @@ Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->name('petugas.')
         Route::get('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'show'])->name('petugas.pengajuan_barang.show');
         Route::get('/pengajuan-barang/{id}/edit', [PengajuanBarangController::class, 'edit'])->name('petugas.pengajuan_barang.edit');
         Route::put('/pengajuan-barang/{id}', [PengajuanBarangController::class, 'update'])->name('petugas.pengajuan_barang.update');
+
+        //Ruangan
+        Route::get('/index/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+        Route::get('/create/ruangan', [RuanganController::class, 'create'])->name('ruangan.create');
+        Route::get('/edit/{id}/ruangan', [RuanganController::class, 'edit'])->name('ruangan.edit');
+        Route::get('/delete/{id}/ruangan', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
 });
 
 Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
@@ -92,4 +99,7 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
         Route::get('/pengajuan_barang/create', [PengajuanBarangController::class, 'create'])->name('pengajuan_barang.create');
         Route::post('/pengajuan_barang', [PengajuanBarangController::class, 'store'])->name('pengajuan_barang.store');
         Route::get('/pengajuan_barang/{id}', [PengajuanBarangController::class, 'show'])->name('pengajuan_barang.show');
+
+        // Ruangan
+        Route::get('/index/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
 });
