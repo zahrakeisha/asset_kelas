@@ -11,7 +11,7 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <a href="{{ route('admin.user.create') }}">
+    <a href="{{ route('admin.users.create') }}">
         Tambah User
     </a>
 
@@ -38,12 +38,12 @@
             <td>{{ $user->role }}</td>
 
             <td>
-                <a href="{{ route('admin.user.edit', $user->id) }}">
+                <a href="{{ route('admin.users.edit', $user->id) }}">
                     Edit
                 </a>
 
                 <form
-                    action="{{ route('admin.user.destroy', $user->id) }}"
+                    action="{{ route('admin.users.destroy', $user->id) }}"
                     method="POST"
                     style="display:inline"
                 >

@@ -7,7 +7,7 @@
 
     <h2>Tambah User</h2>
 
-   <form action="{{ route('admin.user.store') }}" method="POST">
+   <form action="{{ route('admin.users.store') }}" method="POST">
 
         @csrf
 
