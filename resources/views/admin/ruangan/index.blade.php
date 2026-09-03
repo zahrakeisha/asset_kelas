@@ -1,3 +1,10 @@
+@extends('admin.template.app')
+
+@section('title', 'Data Ruangan')
+
+@section('page-title', 'Ruangan')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,3 +125,4 @@
 
 </body>
 </html>
+@endsection

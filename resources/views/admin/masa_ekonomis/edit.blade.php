@@ -1,64 +1,149 @@
-<h3>Edit Masa Ekonomis</h3>
+<!DOCTYPE html>
 
-<form action="{{ route('admin.masa_ekonomis.update', $masaEkonomis->masa_ekonomis_id) }}" method="POST">
-    @csrf
-    @method('PUT')
+<html>
+<head>
+    <title>Edit Masa Ekonomis</title>
 
-    <div>
-        <label>Kategori</label>
-        <select name="kategori_id" required>
-            <option value="">-- Pilih Kategori --</option>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-            @foreach ($kategori as $kategori)
-            <option value="{{ $kategori->kategori_id }}"
-                {{ $masaEkonomis->kategori_id == $kategori->kategori_id ? 'selected' : '' }}>
-                {{ $kategori->nama_kategori }}
-            </option>
-            @endforeach
-        </select>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-warning">
+            <h4 class="mb-0">Edit Masa Ekonomis</h4>
+        </div>
+
+        <div class="card-body">
+
+            <form action="{{ route('admin.masa_ekonomis.update', $masaEkonomis->masa_ekonomis_id) }}"
+                  method="POST">
+
+                @csrf
+                @method('PUT')
+
+
+                {{-- Kategori --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Kategori
+                    </label>
+
+                    <select name="kategori_id"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            -- Pilih Kategori --
+                        </option>
+
+                        @foreach ($kategori as $item)
+
+                            <option value="{{ $item->kategori_id }}"
+                                {{ $masaEkonomis->kategori_id == $item->kategori_id ? 'selected' : '' }}>
+
+                                {{ $item->nama_kategori }}
+
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+
+                {{-- Lama Ekonomis --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Lama Ekonomis
+                    </label>
+
+                    <input type="number"
+                           name="lama_ekonomis"
+                           class="form-control"
+                           value="{{ old('lama_ekonomis', $masaEkonomis->lama_ekonomis) }}"
+                           min="1"
+                           required>
+
+                </div>
+
+
+                {{-- Satuan --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Satuan
+                    </label>
+
+                    <select name="satuan"
+                            class="form-select"
+                            required>
+
+                        <option value="Tahun"
+                            {{ $masaEkonomis->satuan == 'Tahun' ? 'selected' : '' }}>
+                            Tahun
+                        </option>
+
+                        <option value="Bulan"
+                            {{ $masaEkonomis->satuan == 'Bulan' ? 'selected' : '' }}>
+                            Bulan
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                {{-- Keterangan --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Keterangan
+                    </label>
+
+                    <textarea name="keterangan"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Masukkan keterangan">{{ old('keterangan', $masaEkonomis->keterangan) }}</textarea>
+
+                </div>
+
+
+                {{-- Tombol --}}
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-warning">
+                        Update
+                    </button>
+
+                    <a href="{{ route('admin.masa_ekonomis.index') }}"
+                       class="btn btn-secondary">
+                        Kembali
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 
-    <br>
+</div>
 
-    <div>
-        <label>Lama Ekonomis</label>
-        <input
-            type="number"
-            name="lama_ekonomis"
-            value="{{ old('lama_ekonomis', $masaEkonomis->lama_ekonomis) }}"
-            min="1"
-            required>
-    </div>
 
-    <br>
+<!-- Bootstrap JS -->
 
-    <div>
-        <label>Satuan</label>
-        <select name="satuan" required>
-            <option value="Tahun"
-                {{ $masaEkonomis->satuan == 'Tahun' ? 'selected' : '' }}>
-                Tahun
-            </option>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-            <option value="Bulan"
-                {{ $masaEkonomis->satuan == 'Bulan' ? 'selected' : '' }}>
-                Bulan
-            </option>
-        </select>
-    </div>
-
-    <br>
-
-    <div>
-        <label>Keterangan</label>
-        <textarea name="keterangan" rows="3">{{ old('keterangan', $masaEkonomis->keterangan) }}</textarea>
-    </div>
-
-    <br>
-
-    <button type="submit">Update</button>
-
-    <a href="{{ route('admin.masa_ekonomis.index') }}">
-        Kembali
-    </a>
-</form>
+</body>
+</html>
