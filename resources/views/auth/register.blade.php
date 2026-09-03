@@ -52,19 +52,6 @@
 
     <br>
 
-    <div>
-        {!! captcha_img() !!}
-    </div>
-
-    <br>
-
-    <div>
-        <label>Captcha</label>
-        <input type="text" name="captcha" required>
-    </div>
-
-    <br>
-
     <button type="submit">Daftar</button>
 
 </form>
