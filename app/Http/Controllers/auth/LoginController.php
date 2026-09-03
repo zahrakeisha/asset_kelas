@@ -30,7 +30,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->role == 'admin') {
-                return redirect()->route('admin.user.index');
+                return redirect()->route('admin.users.index');
             }
 
             if (Auth::user()->role == 'petugas') {
@@ -38,7 +38,7 @@ class LoginController extends Controller
             }
 
             if (Auth::user()->role == 'siswa') {
-                return redirect('/');
+    return redirect()->route('siswa.pengajuan_barang.index');
             }
 
             return redirect('/');

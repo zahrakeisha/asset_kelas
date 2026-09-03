@@ -1,87 +1,123 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Edit User</title>
+
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
+
 <body>
 
-    <h2>Edit User</h2>
-    
-    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+<div class="container mt-5">
 
-        @csrf
-        @method('PUT')
 
-        <p>
-            Nama
-            <br>
-            <input type="text"
-                name="name"
-                value="{{ $user->name }}">
-        </p>
+<div class="card shadow-sm">
 
-        <p>
-            Username
-            <br>
-            <input type="text"
-                name="username"
-                value="{{ $user->username }}">
-        </p>
+    <div class="card-header bg-warning">
+        <h4 class="mb-0">Edit User</h4>
+    </div>
 
-        <p>
-            No Telepon
-            <br>
-            <input type="text"
-                name="no_telpon"
-                value="{{ $user->no_telpon }}">
-        </p>
+    <div class="card-body">
 
-        <p>
-            Email
-            <br>
-            <input type="email"
-                name="email"
-                value="{{ $user->email }}">
-        </p>
+        <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
 
-        <p>
-            Password
-            <br>
-            <input type="password"
-                name="password"
-                placeholder="Kosongkan jika tidak diubah">
-        </p>
+            @csrf
+            @method('PUT')
 
-        <p>
-            Role
-            <br>
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
 
-            <select name="role">
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       value="{{ $user->name }}">
+            </div>
 
-                <option value="admin"
-                    {{ $user->role == 'admin' ? 'selected' : '' }}>
-                    Admin
-                </option>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
 
-                <option value="petugas"
-                    {{ $user->role == 'petugas' ? 'selected' : '' }}>
-                    Petugas
-                </option>
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       value="{{ $user->username }}">
+            </div>
 
-                <option value="siswa"
-                    {{ $user->role == 'siswa' ? 'selected' : '' }}>
-                    Peminjam
-                </option>
+            <div class="mb-3">
+                <label class="form-label">No Telepon</label>
 
-            </select>
+                <input type="text"
+                       name="no_telpon"
+                       class="form-control"
+                       value="{{ $user->no_telpon }}">
+            </div>
 
-        </p>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
 
-        <button type="submit">
-            Update
-        </button>
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       value="{{ $user->email }}">
+            </div>
 
-    </form>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+
+                <input type="password"
+                       name="password"
+                       class="form-control"
+                       placeholder="Kosongkan jika tidak diubah">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+
+                <select name="role" class="form-select">
+
+                    <option value="admin"
+                        {{ $user->role == 'admin' ? 'selected' : '' }}>
+                        Admin
+                    </option>
+
+                    <option value="petugas"
+                        {{ $user->role == 'petugas' ? 'selected' : '' }}>
+                        Petugas
+                    </option>
+
+                    <option value="siswa"
+                        {{ $user->role == 'siswa' ? 'selected' : '' }}>
+                        Siswa
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="d-flex gap-2">
+
+                <button type="submit" class="btn btn-warning">
+                    Update
+                </button>
+
+                <a href="{{ route('admin.users.index') }}"
+                   class="btn btn-secondary">
+                    Kembali
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</div>
 
 </body>
 </html>

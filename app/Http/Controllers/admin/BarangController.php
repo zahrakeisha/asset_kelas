@@ -19,7 +19,7 @@ class BarangController extends Controller
     public function index()
     {
         $barangs = Barang::all();
-        return view('barang.index', compact('barangs'));
+        return view('admin.barang.index', compact('barangs'));
     }
 
     /**
@@ -33,7 +33,7 @@ class BarangController extends Controller
         $ruangan = Ruangan::all();
         $masa_ekonomis = Masa_ekonomis::all();
 
-        return view('barang.create', compact(
+        return view('admin.barang.create', compact(
             'kategori',
             'ruangan',
             'masa_ekonomis'
@@ -85,12 +85,6 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $barang = Barang::with(['kategori', 'masaEkonomis'])->findOrFail($id);
-
-        return view('barang.show', compact('barang'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -105,7 +99,7 @@ class BarangController extends Controller
         $ruangan = Ruangan::all();
         $masa_ekonomis = Masa_ekonomis::all();
 
-        return view('barang.edit', compact(
+        return view('admin.barang.edit', compact(
             'barang',
             'kategori',
             'ruangan',

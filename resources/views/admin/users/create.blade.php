@@ -1,77 +1,124 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Tambah User</title>
+
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
+
 <body>
 
-    <h2>Tambah User</h2>
+<div class="container mt-5">
 
-   <form action="{{ route('admin.users.store') }}" method="POST">
 
-        @csrf
+<div class="card shadow-sm">
 
-        <p>
-            Nama
-            <br>
-            <input type="text" name="name">
-        </p>
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Tambah User</h4>
+    </div>
 
-        <p>
-            Username
-            <br>
-            <input type="text" name="username">
-        </p>
+    <div class="card-body">
 
-        <p>
-            No Telepon
-            <br>
-            <input type="text" name="no_telpon">
-        </p>
+        <form action="{{ route('admin.users.store') }}" method="POST">
 
-        <p>
-            Email
-            <br>
-            <input type="email" name="email">
-        </p>
+            @csrf
 
-        <p>
-            Password
-            <br>
-            <input type="password" name="password">
-        </p>
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
 
-        <p>
-            Role
-            <br>
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       placeholder="Masukkan nama">
+            </div>
 
-            <select name="role">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
 
-                <option value="">
-                    Pilih Role
-                </option>
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       placeholder="Masukkan username">
+            </div>
 
-                <option value="admin">
-                    Admin
-                </option>
+            <div class="mb-3">
+                <label class="form-label">No Telepon</label>
 
-                <option value="petugas">
-                    Petugas
-                </option>
+                <input type="text"
+                       name="no_telpon"
+                       class="form-control"
+                       placeholder="Masukkan nomor telepon">
+            </div>
 
-                <option value="siswa">
-                    Siswa
-                </option>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
 
-            </select>
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       placeholder="Masukkan email">
+            </div>
 
-        </p>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
 
-        <button type="submit">
-            Simpan
-        </button>
+                <input type="password"
+                       name="password"
+                       class="form-control"
+                       placeholder="Masukkan password">
+            </div>
 
-    </form>
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+
+                <select name="role" class="form-select">
+
+                    <option value="">
+                        Pilih Role
+                    </option>
+
+                    <option value="admin">
+                        Admin
+                    </option>
+
+                    <option value="petugas">
+                        Petugas
+                    </option>
+
+                    <option value="siswa">
+                        Siswa
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="d-flex gap-2">
+
+                <button type="submit" class="btn btn-primary">
+                    Simpan
+                </button>
+
+                <a href="{{ route('admin.users.index') }}"
+                   class="btn btn-secondary">
+                    Kembali
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</div>
 
 </body>
 </html>

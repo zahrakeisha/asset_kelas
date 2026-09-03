@@ -1,10 +1,10 @@
 <h3>Data Masa Ekonomis</h3>
 
 <a href="{{ route('admin.masa_ekonomis.create') }}">
-    Tambah Masa Ekonomis
+    + Tambah Masa Ekonomis
 </a>
 
-<table border="1">
+<table>
     <thead>
         <tr>
             <th>No</th>
@@ -20,39 +20,23 @@
         @forelse ($masaEkonomis as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
-
-            <td>
-                {{ $item->kategori->nama_kategori ?? '-' }}
-            </td>
-
-            <td>
-                {{ $item->lama_ekonomis }}
-            </td>
-
-            <td>
-                {{ $item->satuan }}
-            </td>
-
-            <td>
-                {{ $item->keterangan ?? '-' }}
-            </td>
-
+            <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
+            <td>{{ $item->lama_ekonomis }}</td>
+            <td>{{ $item->satuan }}</td>
+            <td>{{ $item->keterangan ?? '-' }}</td>
             <td>
                 <a href="{{ route('admin.masa_ekonomis.edit', $item->masa_ekonomis_id) }}">
                     Edit
                 </a>
 
                 <form action="{{ route('admin.masa_ekonomis.destroy', $item->masa_ekonomis_id) }}"
-                    method="POST"
-                    style="display: inline;">
+                    method="POST">
                     @csrf
                     @method('DELETE')
-
                     <button type="submit">Hapus</button>
                 </form>
             </td>
         </tr>
-
         @empty
         <tr>
             <td colspan="6">Belum ada data.</td>

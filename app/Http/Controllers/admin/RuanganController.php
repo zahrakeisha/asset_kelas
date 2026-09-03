@@ -15,7 +15,7 @@ class RuanganController extends Controller
     public function index()
     {
         $ruangan = Ruangan::with('barang')->get();
-        return view ('ruangan.index', compact('ruangan'));
+        return view ('admin.ruangan.index', compact('ruangan'));
 
     }
 
@@ -26,7 +26,7 @@ class RuanganController extends Controller
      */
     public function create()
     {
-        return view('ruangan.create');
+        return view('admin.ruangan.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class RuanganController extends Controller
     public function show($id)
     {
         $ruangan = Ruangan::with('barang')->findOrFail($id);
-        return view('ruangan.show', compact('ruangan'));
+        return view('admin.ruangan.show', compact('ruangan'));
     }
 
     /**
@@ -73,7 +73,7 @@ class RuanganController extends Controller
     public function edit($id)
     {
         $ruangan = Ruangan::findOrFail($id);
-        return view('ruangan.edit', compact('ruangan'));
+        return view('admin.ruangan.edit', compact('ruangan'));
     }
 
     /**

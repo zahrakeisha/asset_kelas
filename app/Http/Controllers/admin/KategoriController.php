@@ -15,7 +15,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategoris = Kategori::all();
-        return view('kategori.index', compact('kategoris'));
+        return view('admin.kategori.index', compact('kategoris'));
     }
 
     /**
@@ -25,7 +25,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('kategori.create');
+        return view('admin.kategori.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class KategoriController extends Controller
     {
         $kategoris = Kategori::findOrFail($id);
 
-        return view('kategori.show', compact('kategoris'));
+        return view('admin.kategori.show', compact('kategoris'));
     }
 
     /**
@@ -70,7 +70,7 @@ class KategoriController extends Controller
     {
         $kategoris = Kategori::findOrFail($id);
 
-        return view('kategori.edit', compact('kategoris'));
+        return view('admin.kategori.edit', compact('kategoris'));
     }
 
     /**

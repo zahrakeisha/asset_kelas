@@ -16,7 +16,7 @@ class MasaEkonomisController extends Controller
     public function index()
     {
         $masaEkonomis = Masa_ekonomis::with('kategori')->get();
-        return view('masa_ekonomis.index', compact('masaEkonomis'));
+        return view('admin.masa_ekonomis.index', compact('masaEkonomis'));
     }
 
     /**
@@ -29,7 +29,7 @@ class MasaEkonomisController extends Controller
 
         $kategori = Kategori::all();
 
-        return view('masa_ekonomis.create', compact('kategori'));
+        return view('admin.masa_ekonomis.create', compact('kategori'));
     }
 
     /**
@@ -60,17 +60,6 @@ class MasaEkonomisController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -81,7 +70,7 @@ class MasaEkonomisController extends Controller
         $masaEkonomis = Masa_ekonomis::findOrFail($id);
         $kategori = Kategori::all();
 
-        return view('masa_ekonomis.edit', compact('masaEkonomis', 'kategori'));
+        return view('admin.masa_ekonomis.edit', compact('masaEkonomis', 'kategori'));
     }
 
     /**
