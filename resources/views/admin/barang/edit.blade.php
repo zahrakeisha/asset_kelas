@@ -1,120 +1,280 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Barang</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 </head>
+
 <body>
 
-<h1>Edit Barang</h1>
+    <div class="container mt-5 mb-5">
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
 
-<form action="{{ route('admin.barang.update', $barang->barang_id) }}" method="POST">
-    @csrf
-    @method('PUT')
+                <div class="card shadow-sm">
 
-    <label>Kode Barang</label><br>
-    <input type="text" name="kode_barang"
-           value="{{ old('kode_barang', $barang->kode_barang) }}">
-    <br><br>
+                    <div class="card-header bg-warning">
+                        <h5 class="mb-0">Edit Barang</h5>
+                    </div>
 
-    <label>Nama Barang</label><br>
-    <input type="text" name="nama_barang"
-           value="{{ old('nama_barang', $barang->nama_barang) }}">
-    <br><br>
+                    <div class="card-body">
 
-    <label>Kategori</label><br>
-    <select name="kategori_id">
-        <option value="">-- Pilih Kategori --</option>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Terjadi kesalahan!</strong>
+                            <ul class="mb-0 mt-2">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
-        @foreach ($kategori as $item)
-            <option value="{{ $item->kategori_id }}"
-                {{ old('kategori_id', $barang->kategori_id) == $item->kategori_id ? 'selected' : '' }}>
-                {{ $item->nama_kategori }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
+                        <form action="{{ route('admin.barang.update', $barang->barang_id) }}"
+                            method="POST">
 
-    <label>Ruangan</label><br>
-    <select name="ruangan_id">
-        <option value="">-- Pilih Ruangan --</option>
+                            @csrf
+                            @method('PUT')
 
-        @foreach ($ruangan as $item)
-            <option value="{{ $item->ruangan_id }}"
-                {{ old('ruangan_id', $barang->ruangan_id) == $item->ruangan_id ? 'selected' : '' }}>
-                {{ $item->nama_ruangan }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
+                            <div class="row">
 
-    <label>Masa Ekonomis</label><br>
-    <select name="masa_ekonomis_id">
-        <option value="">-- Pilih Masa Ekonomis --</option>
+                                {{-- Kode Barang --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="kode_barang" class="form-label">
+                                        Kode Barang
+                                    </label>
 
-        @foreach ($masa_ekonomis as $item)
-            <option value="{{ $item->masa_ekonomis_id }}"
-                {{ old('masa_ekonomis_id', $barang->masa_ekonomis_id) == $item->masa_ekonomis_id ? 'selected' : '' }}>
-                {{ $item->lama_ekonomis }} {{ $item->satuan }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
+                                    <input type="text"
+                                        name="kode_barang"
+                                        id="kode_barang"
+                                        class="form-control"
+                                        value="{{ old('kode_barang', $barang->kode_barang) }}"
+                                        required>
+                                </div>
 
-    <label>Merek</label><br>
-    <input type="text" name="merek"
-           value="{{ old('merek', $barang->merek) }}">
-    <br><br>
+                                {{-- Nama Barang --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="nama_barang" class="form-label">
+                                        Nama Barang
+                                    </label>
 
-    <label>Model</label><br>
-    <input type="text" name="model"
-           value="{{ old('model', $barang->model) }}">
-    <br><br>
+                                    <input type="text"
+                                        name="nama_barang"
+                                        id="nama_barang"
+                                        class="form-control"
+                                        value="{{ old('nama_barang', $barang->nama_barang) }}"
+                                        required>
+                                </div>
 
-    <label>Serial Number</label><br>
-    <input type="text" name="serial_number"
-           value="{{ old('serial_number', $barang->serial_number) }}">
-    <br><br>
+                                {{-- Kategori --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="kategori_id" class="form-label">
+                                        Kategori
+                                    </label>
 
-    <label>Jumlah</label><br>
-    <input type="number" name="jumlah" min="1"
-           value="{{ old('jumlah', $barang->jumlah) }}">
-    <br><br>
+                                    <select name="kategori_id"
+                                        id="kategori_id"
+                                        class="form-select"
+                                        required>
 
-    <label>Kondisi</label><br>
-    <select name="kondisi">
-        <option value="Baik" {{ old('kondisi', $barang->kondisi) == 'Baik' ? 'selected' : '' }}>
-            Baik
-        </option>
-        <option value="Rusak Ringan" {{ old('kondisi', $barang->kondisi) == 'Rusak Ringan' ? 'selected' : '' }}>
-            Rusak Ringan
-        </option>
-        <option value="Rusak Berat" {{ old('kondisi', $barang->kondisi) == 'Rusak Berat' ? 'selected' : '' }}>
-            Rusak Berat
-        </option>
-    </select>
-    <br><br>
+                                        <option value="">-- Pilih Kategori --</option>
 
-    <label>Tanggal Perolehan</label><br>
-    <input type="date" name="tanggal_perolehan"
-           value="{{ old('tanggal_perolehan', $barang->tanggal_perolehan) }}">
-    <br><br>
+                                        @foreach ($kategori as $item)
+                                        <option value="{{ $item->kategori_id }}"
+                                            {{ old('kategori_id', $barang->kategori_id) == $item->kategori_id ? 'selected' : '' }}>
+                                            {{ $item->nama_kategori }}
+                                        </option>
+                                        @endforeach
 
-    <label>Keterangan</label><br>
-    <textarea name="keterangan">{{ old('keterangan', $barang->keterangan) }}</textarea>
-    <br><br>
+                                    </select>
+                                </div>
 
-    <button type="submit">Update</button>
-    <a href="{{ route('admin.barang.index') }}">Kembali</a>
+                                {{-- Ruangan --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="ruangan_id" class="form-label">
+                                        Ruangan
+                                    </label>
 
-</form>
+                                    <select name="ruangan_id"
+                                        id="ruangan_id"
+                                        class="form-select"
+                                        required>
+
+                                        <option value="">-- Pilih Ruangan --</option>
+
+                                        @foreach ($ruangan as $item)
+                                        <option value="{{ $item->ruangan_id }}"
+                                            {{ old('ruangan_id', $barang->ruangan_id) == $item->ruangan_id ? 'selected' : '' }}>
+                                            {{ $item->nama_ruangan }}
+                                        </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                                {{-- Masa Ekonomis --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="masa_ekonomis_id" class="form-label">
+                                        Masa Ekonomis
+                                    </label>
+
+                                    <select name="masa_ekonomis_id"
+                                        id="masa_ekonomis_id"
+                                        class="form-select"
+                                        required>
+
+                                        <option value="">-- Pilih Masa Ekonomis --</option>
+
+                                        @foreach ($masa_ekonomis as $item)
+                                        <option value="{{ $item->masa_ekonomis_id }}"
+                                            {{ old('masa_ekonomis_id', $barang->masa_ekonomis_id) == $item->masa_ekonomis_id ? 'selected' : '' }}>
+                                            {{ $item->lama_ekonomis }} {{ $item->satuan }}
+                                        </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                                {{-- Jumlah --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="jumlah" class="form-label">
+                                        Jumlah
+                                    </label>
+
+                                    <input type="number"
+                                        name="jumlah"
+                                        id="jumlah"
+                                        class="form-control"
+                                        min="1"
+                                        value="{{ old('jumlah', $barang->jumlah) }}"
+                                        required>
+                                </div>
+
+                                {{-- Merek --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="merek" class="form-label">
+                                        Merek
+                                    </label>
+
+                                    <input type="text"
+                                        name="merek"
+                                        id="merek"
+                                        class="form-control"
+                                        value="{{ old('merek', $barang->merek) }}">
+                                </div>
+
+                                {{-- Model --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="model" class="form-label">
+                                        Model
+                                    </label>
+
+                                    <input type="text"
+                                        name="model"
+                                        id="model"
+                                        class="form-control"
+                                        value="{{ old('model', $barang->model) }}">
+                                </div>
+
+                                {{-- Serial Number --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="serial_number" class="form-label">
+                                        Serial Number
+                                    </label>
+
+                                    <input type="text"
+                                        name="serial_number"
+                                        id="serial_number"
+                                        class="form-control"
+                                        value="{{ old('serial_number', $barang->serial_number) }}">
+                                </div>
+
+                                {{-- Kondisi --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="kondisi" class="form-label">
+                                        Kondisi
+                                    </label>
+
+                                    <select name="kondisi"
+                                        id="kondisi"
+                                        class="form-select"
+                                        required>
+
+                                        <option value="Baik"
+                                            {{ old('kondisi', $barang->kondisi) == 'Baik' ? 'selected' : '' }}>
+                                            Baik
+                                        </option>
+
+                                        <option value="Rusak Ringan"
+                                            {{ old('kondisi', $barang->kondisi) == 'Rusak Ringan' ? 'selected' : '' }}>
+                                            Rusak Ringan
+                                        </option>
+
+                                        <option value="Rusak Berat"
+                                            {{ old('kondisi', $barang->kondisi) == 'Rusak Berat' ? 'selected' : '' }}>
+                                            Rusak Berat
+                                        </option>
+
+                                    </select>
+                                </div>
+
+                                {{-- Tanggal Perolehan --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="tanggal_perolehan" class="form-label">
+                                        Tanggal Perolehan
+                                    </label>
+
+                                    <input type="date"
+                                        name="tanggal_perolehan"
+                                        id="tanggal_perolehan"
+                                        class="form-control"
+                                        value="{{ old('tanggal_perolehan', $barang->tanggal_perolehan) }}">
+                                </div>
+
+                                {{-- Keterangan --}}
+                                <div class="col-12 mb-3">
+                                    <label for="keterangan" class="form-label">
+                                        Keterangan
+                                    </label>
+
+                                    <textarea name="keterangan"
+                                        id="keterangan"
+                                        class="form-control"
+                                        rows="3">{{ old('keterangan', $barang->keterangan) }}</textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-3">
+
+                                <a href="{{ route('admin.barang.index') }}"
+                                    class="btn btn-secondary">
+                                    Kembali
+                                </a>
+
+                                <button type="submit" class="btn btn-warning">
+                                    Update Barang
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
 </body>
+
 </html>
