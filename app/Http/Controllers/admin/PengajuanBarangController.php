@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
 use App\Pengajuan_barang;
 use App\Barang;
@@ -23,49 +24,6 @@ class PengajuanBarangController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $barang = Barang::all();
-
-        return view('admin.pengajuan_barang.create', compact('barang'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'barang_id' => 'required|exists:barangs,barang_id',
-            'tanggal_pengajuan' => 'required|date',
-            'jenis_pengajuan' => 'required|in:Perbaikan,Penggantian,Penambahan',
-            'alasan' => 'required|string',
-            'status' => 'nullable|in:Menunggu,Disetujui,Ditolak',
-            'catatan' => 'nullable|string',
-        ]);
-
-        Pengajuan_barang::create([
-            'barang_id' => $request->barang_id,
-            'tanggal_pengajuan' => $request->tanggal_pengajuan,
-            'jenis_pengajuan' => $request->jenis_pengajuan,
-            'alasan' => $request->alasan,
-            'status' => $request->status ?? 'Menunggu',
-            'catatan' => $request->catatan,
-        ]);
-
-        return redirect()
-            ->route('admin.pengajuan_barang.index')
-            ->with('success', 'Pengajuan berhasil ditambahkan.');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -80,7 +38,7 @@ class PengajuanBarangController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource (Verifikasi Status & Catatan).
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

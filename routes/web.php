@@ -7,11 +7,10 @@ use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\MasaEkonomisController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
-
-use App\Http\Controllers\admin\PengajuanBarangController;
-
+use App\Http\Controllers\admin\PengajuanBarangController as AdminPengajuanController;;
 use App\Http\Controllers\admin\RuanganController;
 use App\Http\Controllers\admin\BarangController;
+use App\Http\Controllers\siswa\PengajuanBarangController as SiswaPengajuanController;;
 
 /*
 |--------------------------------------------------------------------------
