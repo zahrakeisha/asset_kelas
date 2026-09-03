@@ -1,83 +1,151 @@
+@extends('admin.template.app')
+
+@section('title', 'Data Barang')
+
+@section('page-title', 'Data Barang')
+
+@section('content')
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Data Barang</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <h1>Data Barang</h1>
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Data Barang</h2>
+
+        <a href="{{ route('admin.barang.create') }}" class="btn btn-primary">
+            + Tambah Barang
+        </a>
+    </div>
+
 
     @if(session('success'))
-    <p>{{ session('success') }}</p>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
     @endif
 
-    <a href="{{ route('admin.barang.create') }}">Tambah Barang</a>
 
-    <br><br>
+    <div class="card shadow-sm">
 
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>No</th>
-            <th>Kode Barang</th>
-            <th>Nama Barang</th>
-            <th>Kategori</th>
-            <th>Masa Ekonomis</th>
-            <th>Jumlah</th>
-            <th>Aksi</th>
-        </tr>
+        <div class="card-body">
 
-        @foreach($barangs as $barang)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $barang->kode_barang }}</td>
-            <td>{{ $barang->nama_barang }}</td>
-            <td>{{ $barang->kategori->nama_kategori ?? '-' }}</td>
+            <div class="table-responsive">
 
-            <td>
-                @if($barang->masaEkonomis)
-                {{ $barang->masaEkonomis->lama_ekonomis }}
-                {{ $barang->masaEkonomis->satuan }}
-                @else
-                -
-                @endif
-            </td>
+                <table class="table table-bordered table-hover align-middle">
 
-            <td>{{ $barang->jumlah }}</td>
+                    <thead class="table-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th>Kategori</th>
+                            <th>Masa Ekonomis</th>
+                            <th>Jumlah</th>
+                            <th width="220">Aksi</th>
+                        </tr>
+                    </thead>
 
-            <td>
-                <a href="{{ route('admin.barang.show', $barang->barang_id) }}">
-                    Detail
-                </a>
+                    <tbody>
 
-                |
+                        @forelse($barangs as $barang)
 
-                <a href="{{ route('admin.barang.edit', $barang->barang_id) }}">
-                    Edit
-                </a>
+                        <tr>
 
-                |
+                            <td>{{ $loop->iteration }}</td>
 
-                <form action="{{ route('admin.barang.destroy', $barang->barang_id) }}"
-                    method="POST"
-                    style="display:inline">
+                            <td>{{ $barang->kode_barang }}</td>
 
-                    @csrf
-                    @method('DELETE')
+                            <td>{{ $barang->nama_barang }}</td>
 
-                    <button type="submit"
-                        onclick="return confirm('Yakin ingin menghapus data ini?')">
-                        Hapus
-                    </button>
+                            <td>
+                                {{ $barang->kategori->nama_kategori ?? '-' }}
+                            </td>
 
-                </form>
-            </td>
-        </tr>
-        @endforeach
+                            <td>
+                                @if($barang->masaEkonomis)
 
-    </table>
+                                    {{ $barang->masaEkonomis->lama_ekonomis }}
+                                    {{ $barang->masaEkonomis->satuan }}
+
+                                @else
+
+                                    -
+
+                                @endif
+                            </td>
+
+                            <td>
+                                {{ $barang->jumlah }}
+                            </td>
+
+                            <td>
+
+                                <a href="{{ route('admin.barang.show', $barang->barang_id) }}"
+                                   class="btn btn-sm btn-info text-white">
+                                    Detail
+                                </a>
+
+                                <a href="{{ route('admin.barang.edit', $barang->barang_id) }}"
+                                   class="btn btn-sm btn-warning">
+                                    Edit
+                                </a>
+
+                                <form action="{{ route('admin.barang.destroy', $barang->barang_id) }}"
+                                      method="POST"
+                                      class="d-inline">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                        Hapus
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        @empty
+
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                Belum ada data barang.
+                            </td>
+                        </tr>
+
+                        @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
 </html>
+
+@endsection

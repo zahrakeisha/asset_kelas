@@ -44,6 +44,10 @@ Route::middleware(['auth', 'role:admin'])
         ->name('admin.')
         ->group(function () {
 
+        Route::get('/dashboard', function () {
+                return view('admin.dashboard');
+                })->name('dashboard');
+
                 // User
                 Route::get('/user', [UserController::class, 'index'])->name('users.index');
                 Route::get('/user/create', [UserController::class, 'create'])->name('users.create');

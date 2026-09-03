@@ -1,114 +1,257 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Tambah Barang</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<h1>Tambah Barang</h1>
+<div class="container mt-5 mb-5">
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+    <div class="card shadow-sm">
 
-<form action="{{ route('admin.barang.store') }}" method="POST">
-    @csrf
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Tambah Barang</h4>
+        </div>
 
-    <label>Kode Barang</label><br>
-    <input type="text" name="kode_barang" value="{{ old('kode_barang') }}">
-    <br><br>
+        <div class="card-body">
 
-    <label>Nama Barang</label><br>
-    <input type="text" name="nama_barang" value="{{ old('nama_barang') }}">
-    <br><br>
+            {{-- Error Validasi --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    <label>Kategori</label><br>
-    <select name="kategori_id">
-        <option value="">-- Pilih Kategori --</option>
 
-        @foreach ($kategori as $item)
-            <option value="{{ $item->kategori_id }}"
-                {{ old('kategori_id') == $item->kategori_id ? 'selected' : '' }}>
-                {{ $item->nama_kategori }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
+            <form action="{{ route('admin.barang.store') }}" method="POST">
 
-    <label>Ruangan</label><br>
-    <select name="ruangan_id">
-        <option value="">-- Pilih Ruangan --</option>
+                @csrf
 
-        @foreach ($ruangan as $item)
-            <option value="{{ $item->ruangan_id }}"
-                {{ old('ruangan_id') == $item->ruangan_id ? 'selected' : '' }}>
-                {{ $item->nama_ruangan }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
 
-    <label>Masa Ekonomis</label><br>
-    <select name="masa_ekonomis_id">
-        <option value="">-- Pilih Masa Ekonomis --</option>
+                {{-- Kode Barang --}}
+                <div class="mb-3">
+                    <label class="form-label">Kode Barang</label>
 
-        @foreach ($masa_ekonomis as $item)
-            <option value="{{ $item->masa_ekonomis_id }}"
-                {{ old('masa_ekonomis_id') == $item->masa_ekonomis_id ? 'selected' : '' }}>
-                {{ $item->lama_ekonomis }} {{ $item->satuan }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
+                    <input type="text"
+                           name="kode_barang"
+                           class="form-control"
+                           value="{{ old('kode_barang') }}"
+                           placeholder="Masukkan kode barang">
+                </div>
 
-    <label>Merek</label><br>
-    <input type="text" name="merek" value="{{ old('merek') }}">
-    <br><br>
 
-    <label>Model</label><br>
-    <input type="text" name="model" value="{{ old('model') }}">
-    <br><br>
+                {{-- Nama Barang --}}
+                <div class="mb-3">
+                    <label class="form-label">Nama Barang</label>
 
-    <label>Serial Number</label><br>
-    <input type="text" name="serial_number" value="{{ old('serial_number') }}">
-    <br><br>
+                    <input type="text"
+                           name="nama_barang"
+                           class="form-control"
+                           value="{{ old('nama_barang') }}"
+                           placeholder="Masukkan nama barang">
+                </div>
 
-    <label>Jumlah</label><br>
-    <input type="number" name="jumlah" min="1" value="{{ old('jumlah', 1) }}">
-    <br><br>
 
-    <label>Kondisi</label><br>
-    <select name="kondisi">
-        <option value="">-- Pilih Kondisi --</option>
-        <option value="Baik" {{ old('kondisi') == 'Baik' ? 'selected' : '' }}>
-            Baik
-        </option>
-        <option value="Rusak Ringan" {{ old('kondisi') == 'Rusak Ringan' ? 'selected' : '' }}>
-            Rusak Ringan
-        </option>
-        <option value="Rusak Berat" {{ old('kondisi') == 'Rusak Berat' ? 'selected' : '' }}>
-            Rusak Berat
-        </option>
-    </select>
-    <br><br>
+                {{-- Kategori --}}
+                <div class="mb-3">
+                    <label class="form-label">Kategori</label>
 
-    <label>Tanggal Perolehan</label><br>
-    <input type="date" name="tanggal_perolehan"
-           value="{{ old('tanggal_perolehan') }}">
-    <br><br>
+                    <select name="kategori_id" class="form-select">
 
-    <label>Keterangan</label><br>
-    <textarea name="keterangan">{{ old('keterangan') }}</textarea>
-    <br><br>
+                        <option value="">-- Pilih Kategori --</option>
 
-    <button type="submit">Simpan</button>
-    <a href="{{ route('admin.barang.index') }}">Kembali</a>
+                        @foreach ($kategori as $item)
 
-</form>
+                            <option value="{{ $item->kategori_id }}"
+                                {{ old('kategori_id') == $item->kategori_id ? 'selected' : '' }}>
+
+                                {{ $item->nama_kategori }}
+
+                            </option>
+
+                        @endforeach
+
+                    </select>
+                </div>
+
+
+                {{-- Ruangan --}}
+                <div class="mb-3">
+                    <label class="form-label">Ruangan</label>
+
+                    <select name="ruangan_id" class="form-select">
+
+                        <option value="">-- Pilih Ruangan --</option>
+
+                        @foreach ($ruangan as $item)
+
+                            <option value="{{ $item->ruangan_id }}"
+                                {{ old('ruangan_id') == $item->ruangan_id ? 'selected' : '' }}>
+
+                                {{ $item->nama_ruangan }}
+
+                            </option>
+
+                        @endforeach
+
+                    </select>
+                </div>
+
+
+                {{-- Masa Ekonomis --}}
+                <div class="mb-3">
+                    <label class="form-label">Masa Ekonomis</label>
+
+                    <select name="masa_ekonomis_id" class="form-select">
+
+                        <option value="">-- Pilih Masa Ekonomis --</option>
+
+                        @foreach ($masa_ekonomis as $item)
+
+                            <option value="{{ $item->masa_ekonomis_id }}"
+                                {{ old('masa_ekonomis_id') == $item->masa_ekonomis_id ? 'selected' : '' }}>
+
+                                {{ $item->lama_ekonomis }} {{ $item->satuan }}
+
+                            </option>
+
+                        @endforeach
+
+                    </select>
+                </div>
+
+
+                {{-- Merek --}}
+                <div class="mb-3">
+                    <label class="form-label">Merek</label>
+
+                    <input type="text"
+                           name="merek"
+                           class="form-control"
+                           value="{{ old('merek') }}"
+                           placeholder="Masukkan merek barang">
+                </div>
+
+
+                {{-- Model --}}
+                <div class="mb-3">
+                    <label class="form-label">Model</label>
+
+                    <input type="text"
+                           name="model"
+                           class="form-control"
+                           value="{{ old('model') }}"
+                           placeholder="Masukkan model barang">
+                </div>
+
+
+                {{-- Serial Number --}}
+                <div class="mb-3">
+                    <label class="form-label">Serial Number</label>
+
+                    <input type="text"
+                           name="serial_number"
+                           class="form-control"
+                           value="{{ old('serial_number') }}"
+                           placeholder="Masukkan serial number">
+                </div>
+
+
+                {{-- Jumlah --}}
+                <div class="mb-3">
+                    <label class="form-label">Jumlah</label>
+
+                    <input type="number"
+                           name="jumlah"
+                           class="form-control"
+                           min="1"
+                           value="{{ old('jumlah', 1) }}"
+                           placeholder="Masukkan jumlah">
+                </div>
+
+
+                {{-- Kondisi --}}
+                <div class="mb-3">
+                    <label class="form-label">Kondisi</label>
+
+                    <select name="kondisi" class="form-select">
+
+                        <option value="">-- Pilih Kondisi --</option>
+
+                        <option value="Baik"
+                            {{ old('kondisi') == 'Baik' ? 'selected' : '' }}>
+                            Baik
+                        </option>
+
+                        <option value="Rusak Ringan"
+                            {{ old('kondisi') == 'Rusak Ringan' ? 'selected' : '' }}>
+                            Rusak Ringan
+                        </option>
+
+                        <option value="Rusak Berat"
+                            {{ old('kondisi') == 'Rusak Berat' ? 'selected' : '' }}>
+                            Rusak Berat
+                        </option>
+
+                    </select>
+                </div>
+
+
+                {{-- Tanggal Perolehan --}}
+                <div class="mb-3">
+                    <label class="form-label">Tanggal Perolehan</label>
+
+                    <input type="date"
+                           name="tanggal_perolehan"
+                           class="form-control"
+                           value="{{ old('tanggal_perolehan') }}">
+                </div>
+
+
+                {{-- Keterangan --}}
+                <div class="mb-3">
+                    <label class="form-label">Keterangan</label>
+
+                    <textarea name="keterangan"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Masukkan keterangan">{{ old('keterangan') }}</textarea>
+                </div>
+
+
+                {{-- Tombol --}}
+                <div class="d-flex gap-2">
+
+                    <button type="submit" class="btn btn-primary">
+                        Simpan
+                    </button>
+
+                    <a href="{{ route('admin.barang.index') }}"
+                       class="btn btn-secondary">
+                        Kembali
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
